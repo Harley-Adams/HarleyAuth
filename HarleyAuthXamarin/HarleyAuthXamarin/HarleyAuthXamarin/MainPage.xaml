@@ -18,6 +18,11 @@
             OnSuccess="{Binding OnFacebookLoginSuccessCmd}"
             OnError="{Binding OnFacebookLoginErrorCmd}"
             OnCancel="{Binding OnFacebookLoginCancelCmd}" />
+
+         <Button Text="Authenticate with service"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="OnServiceAuthenticateButtonClicked" /> 
     </StackLayout>
 
 </ContentPage>
