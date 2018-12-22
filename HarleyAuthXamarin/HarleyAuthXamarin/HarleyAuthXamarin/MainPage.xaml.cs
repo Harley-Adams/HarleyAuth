@@ -39,6 +39,10 @@ namespace HarleyAuthXamarin
 				GlobalSettings.AuthToken = responseObject.auth_token;
 				await (Application.Current as App).MainPage.DisplayAlert("AuthResponse to service", responseObject.auth_token, "Ok");
 			}
+			else
+			{
+				await (Application.Current as App).MainPage.DisplayAlert("AuthResponse to service", responseMessage.StatusCode.ToString(), "Ok");
+			}
 		}
 	}
 }
