@@ -22,7 +22,12 @@
          <Button Text="Authenticate with service"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="Center"
-                Clicked="OnServiceAuthenticateButtonClicked" /> 
+                Clicked="OnServiceAuthenticateButtonClicked" />
+
+        <Button Text="Get Protected resource"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
+                Clicked="OnGetProtectedResourceButtonClicked" />
     </StackLayout>
 
 </ContentPage>

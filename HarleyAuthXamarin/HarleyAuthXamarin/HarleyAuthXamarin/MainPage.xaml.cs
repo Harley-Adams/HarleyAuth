@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -16,11 +17,11 @@ namespace HarleyAuthXamarin
 			InitializeComponent();
 		}
 
-		public async void OnServiceAuthenticateButtonClicked(object sender, EventArgs argss)
+		public async void OnServiceAuthenticateButtonClicked(object sender, EventArgs args)
 		{
 			var facebookToken = GlobalSettings.FacebookToken;
 
-			if(facebookToken == null)
+			if (facebookToken == null)
 			{
 				return;
 			}
@@ -43,6 +44,24 @@ namespace HarleyAuthXamarin
 			{
 				await (Application.Current as App).MainPage.DisplayAlert("AuthResponse to service", responseMessage.StatusCode.ToString(), "Ok");
 			}
+		}
+
+		public async void OnGetProtectedResourceButtonClicked(object sender, EventArgs args)
+		{
+			var authToken = GlobalSettings.AuthToken;
+			if (authToken == null)
+			{
+				return;
+			}
+
+			var client = new HttpClient();
+			client.BaseAddress = new Uri($"{GlobalSettings.BackendUrl}/");
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+			var responseMessage = await client.GetAsync($"api/values/auth");
+			var responseJson = await responseMessage.Content.ReadAsStringAsync();
+
+			await (Application.Current as App).MainPage.DisplayAlert("Protected Resource response", responseJson, "Ok");
 		}
 	}
 }
