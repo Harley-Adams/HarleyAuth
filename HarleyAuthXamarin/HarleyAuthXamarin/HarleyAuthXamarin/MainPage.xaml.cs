@@ -17,6 +17,10 @@ namespace HarleyAuthXamarin
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// POST the GlobalSettings.FacebookToken to our facebook login endpoint on the api service.
+		/// Save the JWT token we get back and popup the result.
+		/// </summary>
 		public async void OnServiceAuthenticateButtonClicked(object sender, EventArgs args)
 		{
 			var facebookToken = GlobalSettings.FacebookToken;
@@ -46,6 +50,10 @@ namespace HarleyAuthXamarin
 			}
 		}
 
+		/// <summary>
+		/// GET request to an authorized endpoint using the GlobalSettings.AuthToken as the bearer token.
+		/// Popup the response.
+		/// </summary>
 		public async void OnGetProtectedResourceButtonClicked(object sender, EventArgs args)
 		{
 			var authToken = GlobalSettings.AuthToken;

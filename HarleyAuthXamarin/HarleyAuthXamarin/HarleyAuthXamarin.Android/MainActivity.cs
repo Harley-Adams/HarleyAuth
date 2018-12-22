@@ -19,8 +19,7 @@ namespace HarleyAuthXamarin.Droid
 			Intent data)
 		{
 			base.OnActivityResult(requestCode, resultCode, data);
-			CallbackManager.OnActivityResult(requestCode, Convert.ToInt32(resultCode),
-				data);
+			CallbackManager.OnActivityResult(requestCode, Convert.ToInt32(resultCode), data);
 		}
 
 		protected override void OnCreate(Bundle savedInstanceState)
