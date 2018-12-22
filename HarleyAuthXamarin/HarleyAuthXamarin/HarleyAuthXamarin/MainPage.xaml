@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:HarleyAuthXamarin"
+             x:Class="HarleyAuthXamarin.MainPage">
+    <ContentPage.BindingContext>
+        <local:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Label Text="Welcome to Xamarin.Forms!" 
+           HorizontalOptions="Center"
+           VerticalOptions="CenterAndExpand" />
+        <local:FacebookLoginButton 
+            HorizontalOptions="Center" 
+            VerticalOptions="CenterAndExpand" 
+            OnSuccess="{Binding OnFacebookLoginSuccessCmd}"
+            OnError="{Binding OnFacebookLoginErrorCmd}"
+            OnCancel="{Binding OnFacebookLoginCancelCmd}" />
+    </StackLayout>
+
+</ContentPage>
