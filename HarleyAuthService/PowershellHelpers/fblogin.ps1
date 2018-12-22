@@ -1,0 +1,13 @@
+$url = "https://localhost:44323/api/ExternalAuth/Facebook"
+$azureUrl = "https://harleyauth.azurewebsites.net/api/ExternalAuth/Facebook"
+
+#$fbToken = "EAAbJqb9Fgn4BAMEOMrTq1RStKr5JTOT9pQp7Gp4MgfhlSqFZCuIInPyKvDJ4MxdjZBRHRD4DKJX7kK6pRG88QM5dKo3dTnsZBtQtv9bxfX0YQzVGzi5a3uZBYJ3KejI9d99W3egyaICOVyO6d6GWnS8nUP3GkFrLBDumP8Cz4PKZCiGZCZAkTSyOUfFeOJCFDVwGe4hLFCkIuyRL3MWRmMdTE7vWsZBOjZAcZD"
+#$fbToken = "EAAFaaSjKuywBAOaaDJ8kwI7oZCq39Yw0OkoLWYYqf7TytdupxjK1E7ZAz72YhOYsRxYYcdO651OjftPmRxgKIZCfCQ1UUbW7v1kgmhkB11wnmrZCFPZBuxXmnxfW04iIkZB4coZBDJZADDNMWzHsMyOevs5lj1vdrZCOgSY5T7xXtolrrCLf3oaTSWGzFdqDCCV43ZAUUckVHeeUvuIfgRIx331x0Tnzwcu0AZD"
+$fbToken = "EAAbJqb9Fgn4BAJZBcL662CTO4ZBgZCvndufdwLjrmXTDPlbuP5gQsgn1zW1g71botJsAbV1CZBkgJ0ZCqwtZAPef9QcL2iclWRPZAZAujM6cmzhkbqeF2brCspV7vsXl7w2cFhJBo068nPpLEsfr79ZCNQYoayowSawnlLHHOdyr3ty0xz92noF18CKQcZAo8XevkWdDahftF3BX0ZCKwvLSAUZAuQdrumXpnfwZD"
+
+$body = @{
+    "AccessToken" = "$fbToken"
+}
+
+
+Invoke-RestMethod -Uri $azureUrl -Method 'Post' -Body ($body|ConvertTo-Json) -ContentType 'application/json'
