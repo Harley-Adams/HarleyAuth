@@ -96,15 +96,7 @@ namespace HarleyAuthService
 			});
 
 			// add identity
-			var builder = services.AddIdentityCore<AppUser>(o =>
-			{
-				// configure identity options
-				o.Password.RequireDigit = false;
-				o.Password.RequireLowercase = false;
-				o.Password.RequireUppercase = false;
-				o.Password.RequireNonAlphanumeric = false;
-				o.Password.RequiredLength = 6;
-			});
+			var builder = services.AddIdentityCore<AppUser>();
 
 			builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
 			builder.AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -124,15 +116,14 @@ namespace HarleyAuthService
 			else
 			{
 				app.UseHsts();
+				app.UseHttpsRedirection();
 			}
 
 			app.UseAuthentication();
 
-			// Dont think I need these two
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
 
-			app.UseHttpsRedirection();
 			app.UseMvc();
 		}
 	}
