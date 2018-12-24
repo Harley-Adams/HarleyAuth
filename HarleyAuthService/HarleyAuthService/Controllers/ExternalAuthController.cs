@@ -57,7 +57,7 @@ namespace HarleyAuthService.Controllers
 			}
 
 			// 3. we've got a valid token so we can request user data from fb
-			var userInfoResponse = await Client.GetStringAsync($"https://graph.facebook.com/v2.8/me?fields=id,email,first_name,last_name,name,gender,locale,birthday,picture&access_token={model.AccessToken}");
+			var userInfoResponse = await Client.GetStringAsync($"https://graph.facebook.com/v2.8/me?fields=id,email,first_name,last_name,name&access_token={model.AccessToken}");
 			var userInfo = JsonConvert.DeserializeObject<FacebookUserData>(userInfoResponse);
 
 			// 4. ready to create the local user account (if necessary) and jwt
@@ -72,14 +72,13 @@ namespace HarleyAuthService.Controllers
 					FacebookId = userInfo.Id,
 					Email = userInfo.Email,
 					UserName = userInfo.Email,
-					PictureUrl = userInfo.Picture.Data.Url
 				};
 
 				var result = await _userManager.CreateAsync(appUser, Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Substring(0, 8));
 
 				if (!result.Succeeded) return BadRequest("User creation failed");
 
-				await _appDbContext.Customers.AddAsync(new Customer { IdentityId = appUser.Id, Location = "", Locale = userInfo.Locale, Gender = userInfo.Gender });
+				await _appDbContext.Customers.AddAsync(new Customer { IdentityId = appUser.Id });
 				await _appDbContext.SaveChangesAsync();
 			}
 
