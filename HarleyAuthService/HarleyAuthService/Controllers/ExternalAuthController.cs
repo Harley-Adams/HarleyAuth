@@ -2,12 +2,14 @@
 
 using System;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using HarleyAuthService.Auth;
 using HarleyAuthService.Data;
 using HarleyAuthService.Helpers;
 using HarleyAuthService.Models;
 using HarleyAuthService.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -94,6 +96,14 @@ namespace HarleyAuthService.Controllers
 			  _jwtFactory, localUser.UserName, _jwtOptions, new JsonSerializerSettings { Formatting = Formatting.Indented });
 
 			return new OkObjectResult(jwt);
+		}
+
+		[HttpGet]
+		[Authorize]
+		public string SayHello()
+		{
+			string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			return "Hello " + userId;
 		}
 	}
 }
